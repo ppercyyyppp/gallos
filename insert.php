@@ -11,14 +11,27 @@
 			$nplacamama =$_POST['nplacamama'];
 			$nombremama =$_POST['nombremama'];
 			$observaciones = $_POST['observaciones'];
-
-			
-
 			$estado = $_POST['estado'];
 			$linea = $_POST['linea'];
+
 			if (!empty($placa) && !empty($nombre) && !empty($fecnac) && !empty($sexo) && !empty($nplacapapa) && !empty($nombrepapa) && !empty($nplacamama) && !empty($nombremama) && !empty($observaciones) && !empty($estado) && !empty($linea)) {
-				
-				$consulta_insert
+
+				$consulta_insert=$con->prepare('INSERT INTO gallo(nplaca,nombre,fecha,sexo,nplacapapa,nombrepapa,nplacamama,nombremama,observaciones,estado,linea)
+					VALUES (:nplaca,:nombre,:fecha:sexo,:nplacapapa,:nombrepapa,:nplacamama,:nombremama,:observaciones,:estado,:linea)');
+				$consulta_insert->execute(array(
+					':nplaca'=>$placa,
+					':nombre'=>$nombre,
+					':fecha'=>$fecnac,
+					':sexo'=>$sexo,
+					':nplacapapa'=>$nplacapapa,
+					':nombrepapa'=>$nombrepapa,
+					':nplacamama'=>$nplacamama,
+					':nombremama'=>$nombremama,
+					':observaciones'=>$observaciones,
+					':estado'=>$estado,
+					':linea'=>$linea
+				));
+				header('location:index.php');
 				
 			}else{
 				echo "<script>alert('los campos estan vacios');</script>";
